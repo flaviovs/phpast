@@ -1,0 +1,21 @@
+{
+    "name": "flaviovs/phpast",
+    "description": "An Abstract Syntax Tree interpreter",
+    "require-dev": {
+        "phpunit/phpunit": "^5.7"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Flávio Veloso",
+            "email": "flaviovs@magnux.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/core"],
+        "psr-4": {
+            "PHPAST\\": "src/"
+        }
+    },
+    "require": {}
+}
