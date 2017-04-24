@@ -17,7 +17,8 @@ class Call extends Node {
 	public function evaluate(SymbolTable $st) {
 		$fnode = $st[(string)$this->id->evaluate($st)];
 		if (!($fnode instanceof Func)) {
-			throw new TypeException("$this->id is not a function");
+			throw new TypeException($this->label,
+			                        "$this->id is not a function");
 		}
 
 		$local_st = new ChainedScopeSymbolTable([], $st, $this->label);
@@ -31,7 +32,8 @@ class Call extends Node {
 			} else if (isset($this->defaults[$arg])) {
 				$local_st[$arg] = $this->defaults[$arg]->evaluate($st);
 			} else {
-				throw new NameException("Missing function argument: $arg");
+				throw new NameException($this->label,
+				                        "Missing function argument: $arg");
 			}
 		}
 

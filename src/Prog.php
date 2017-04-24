@@ -24,7 +24,8 @@ class Prog extends Node implements \ArrayAccess {
 
 	public function offsetSet($offset, $node) {
 		if (!($node instanceof Node)) {
-			throw new TypeException(get_class($this) . " only accepts nodes");
+			throw new TypeException($this->label,
+			                        get_class($this) . " only accepts nodes");
 		}
 		if ($offset === NULL) {
 			$this->nodes[] = $node;

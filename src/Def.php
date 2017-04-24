@@ -13,9 +13,10 @@ class Def extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		$symbol = (string)$this->name; // XXX
+		$symbol = (string)$this->name;
 		if (isset($st[$symbol])) {
-			throw new NameError("Symbol already exist: $symbol");
+			throw new NameError($this->label,
+			                    "Symbol already exist: $symbol");
 		}
 		$st[$symbol] = $this->func;
 	}

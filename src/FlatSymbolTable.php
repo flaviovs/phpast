@@ -13,14 +13,14 @@ class FlatSymbolTable extends \ArrayObject implements SymbolTable {
 
 	public function offsetSet($offset, $value) {
 		if (!($value instanceof Node)) {
-			throw new TypeException("Not a node: $value");
+			throw new TypeException(NULL, "Not a node: $value");
 		}
 		parent::offsetSet($offset, $value);
 	}
 
 	public function offsetGet($offset) {
 		if (!$this->offsetExists($offset)) {
-			throw new NameException("Unknown symbol: $offset");
+			throw new NameException(NULL, "Unknown symbol: $offset");
 		}
 		return parent::offsetGet($offset);
 	}

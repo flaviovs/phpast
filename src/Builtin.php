@@ -24,6 +24,7 @@ class Builtin extends Node {
 
 		$this->args = array_map(function($arg) use ($fac, $label) {
 				if (!($arg instanceof Node)) {
+					// FIXME: check exception, rethrow with our label.
 					$arg = $fac->create($arg, $label);
 				}
 				return $arg;
@@ -36,6 +37,7 @@ class Builtin extends Node {
 											return $n->repr();
 										}, $this->args));;
 		if (!($res instanceof Node)) {
+			// FIXME: check exception, rethrow with our label.
 			$res = $this->fac->create($res, $this->label);
 		}
 		return $res;

@@ -23,6 +23,6 @@ class PHPLiteralFactory implements LiteralFactory {
 			return Null_::get();
 		}
 
-		throw new TypeException("Cannot convert type: $type");
+		throw new TypeException(NULL, "Cannot convert type: $type");
 	}
 }

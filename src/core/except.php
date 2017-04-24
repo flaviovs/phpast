@@ -18,6 +18,21 @@ class ReturnException extends Exception {
 }
 
 class EvalException extends Exception {
+	protected $label;
+
+	public function __construct($label, $message = "", $code = 0,
+	                            \Throwable $previous = NULL) {
+		parent::__construct($message, $code, $previous);
+		$this->label = $label;
+	}
+
+	public function __toString() {
+		return "$this->label: " . parent::__toString();
+	}
+
+	public function getLabel() {
+		return $this->label;
+	}
 }
 
 class DivisionByZeroException extends EvalException {}

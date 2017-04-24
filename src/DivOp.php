@@ -9,7 +9,8 @@ class DivOp extends ArithBinaryOp {
 		$lit2 = $this->node2->evaluate($st);
 
 		if ((string)$lit2 == 0) {
-			throw new DivisionByZeroException();
+			throw new DivisionByZeroException($this->label,
+			                                  "Division by zero");
 		}
 
 		return $this->arithPromote((string)$lit1 / (string)$lit2, $lit1, $lit2);

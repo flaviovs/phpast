@@ -13,6 +13,8 @@ class Assignment extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
+		// FIXME: check for symboltable exception and rethrow with our
+		// label.
 		return ($st[$this->id->evaluate($st)->repr()] = $this->value->evaluate($st));
 	}
 
