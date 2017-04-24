@@ -5,7 +5,7 @@ namespace PHPAST;
 class Prog extends Node implements \ArrayAccess {
 	protected $nodes = [];
 
-	public function __construct(array $nodes = NULL, $label = NULL) {
+	public function __construct(array $nodes = [], $label = NULL) {
 		parent::__construct($label);
 		$this->nodes = $nodes;
 	}
