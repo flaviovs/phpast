@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Prog extends Node implements \ArrayAccess {
+class Prog extends Node implements \ArrayAccess, \IteratorAggregate {
 	protected $nodes = [];
 
 	public function __construct(array $nodes = [], $label = NULL) {
@@ -45,4 +45,8 @@ class Prog extends Node implements \ArrayAccess {
 	public function offsetExists($offset) {
 		return array_key_exists($offset, $this->nodes);
 	}
+
+	public function getIterator() {
+		return new \ArrayIterator($this->nodes);
+    }
 }
