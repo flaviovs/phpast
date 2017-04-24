@@ -3,22 +3,20 @@
 namespace PHPAST;
 
 class Call extends Node {
-	protected $id;
+	protected $ref;
 	protected $args;
 
-	public function __construct(Identifier $id,
-								FlatSymbolTable $args,
-								$label = NULL) {
+	public function __construct(Ref $ref, SymbolTable $args, $label = NULL) {
 		parent::__construct($label);
-		$this->id = $id;
+		$this->ref = $ref;
 		$this->args = $args;
 	}
 
 	public function evaluate(SymbolTable $st) {
-		$fnode = $st[(string)$this->id->evaluate($st)];
+		$fnode = $st[(string)$this->ref];
 		if (!($fnode instanceof Func)) {
 			throw new TypeException($this->label,
-			                        "$this->id is not a function");
+			                        "$this->ref is not a function");
 		}
 
 		$local_st = new ChainedScopeSymbolTable([], $st, $this->label);
@@ -46,7 +44,7 @@ class Call extends Node {
 
 	public function __toString() {
 		$args = $this->args->getArrayCopy();
-		return $this->id . "(" . implode(", ",
+		return $this->ref . "(" . implode(", ",
 										 array_map(function($k) use ($args) {
 												 return "$k=$args[$k]";
 											 }, array_keys($args))) . ")";

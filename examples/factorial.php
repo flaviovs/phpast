@@ -24,7 +24,7 @@ $factorial[] = new IfOp(new Eq(new Ref($num), new Integer(1)),
 $factorial[] = new ReturnOp(
 	new MulOp(new Ref($num),
 	          new Call(
-		          $factorial_id,
+		          new Ref($factorial_id),
 		          new FlatSymbolTable(
 			          [
 				          'num' => new SubOp(new Ref($num), new Integer(1)),
@@ -43,14 +43,16 @@ $prog[] = new Def($factorial_id, $factorial);
 $prog[] = new Outln(
 	[
 		"5! = ",
-		new Call($factorial_id, new FlatSymbolTable(['num' => new Integer(5)]))
+		new Call(new Ref($factorial_id),
+		         new FlatSymbolTable(['num' => new Integer(5)]))
 	]
 );
 
 $prog[] = new Outln(
 	[
 		"15! = ",
-		new Call($factorial_id, new FlatSymbolTable(['num' => new Integer(15)]))
+		new Call(new Ref($factorial_id),
+		         new FlatSymbolTable(['num' => new Integer(15)]))
 	]
 );
 
