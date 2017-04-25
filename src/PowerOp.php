@@ -2,15 +2,15 @@
 
 namespace PHPAST;
 
-class PowerOp extends BinaryOp {
+class PowerOp extends ArithBinaryOp {
 	public function evaluate(SymbolTable $st) {
 		$lit1 = $this->node1->evaluate($st);
 		$lit2 = $this->node2->evaluate($st);
 
-		assert('$lit1 instanceof Literal');
-		assert('$lit2 instanceof Literal');
+		$n1 = (string)$lit1;
+		$n2 = (string)$lit2;
 
-		return (string)$lit1 ** (string)$lit2;
+		return $this->arithPromote($n1 ** $n2, $lit1, $lit2);
 	}
 
 	public function __toString() {
