@@ -5,8 +5,9 @@ namespace PHPAST;
 class Func extends Prog {
 	protected $args;
 
-	public function __construct(ArgList $args, $label = NULL) {
-		parent::__construct($label);
+	public function __construct(ArgList $args, array $nodes = [],
+	                            $label = NULL) {
+		parent::__construct($nodes, $label);
 		$this->args = $args;
 	}
 
