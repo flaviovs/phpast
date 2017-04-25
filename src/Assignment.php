@@ -3,22 +3,22 @@
 namespace PHPAST;
 
 class Assignment extends Node {
-	protected $id;
+	protected $ref;
 	protected $value;
 
-	public function __construct(Identifier $id, Node $value, $label = NULL) {
+	public function __construct(Ref $ref, Node $value, $label = NULL) {
 		parent::__construct($label);
-		$this->id = $id;
+		$this->ref = $ref;
 		$this->value = $value;
 	}
 
 	public function evaluate(SymbolTable $st) {
 		// FIXME: check for symboltable exception and rethrow with our
 		// label.
-		return ($st[$this->id->evaluate($st)->repr()] = $this->value->evaluate($st));
+		return ($st[$this->ref->repr()] = $this->value->evaluate($st));
 	}
 
 	public function __toString() {
-		return $this->id->repr() . ' := ' . $this->value;
+		return $this->ref->repr() . ' := ' . $this->value;
 	}
 }
