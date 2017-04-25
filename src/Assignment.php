@@ -15,7 +15,7 @@ class Assignment extends Node {
 	public function evaluate(SymbolTable $st) {
 		// FIXME: check for symboltable exception and rethrow with our
 		// label.
-		return ($st[$this->ref->repr()] = $this->value->evaluate($st));
+		return $this->ref->assign($st, $this->value->evaluate($st));
 	}
 
 	public function __toString() {

@@ -38,4 +38,21 @@ class RefTest extends NodeTest {
 		$op = new Ref($id);
 		$this->assertEquals("foo", (string)$op);
 	}
+
+	public function testAssign() {
+		$id = $this->createMock(Identifier::class);
+		$id
+			->method('repr')
+			->willReturn('foo');
+
+		$ref = new Ref($id);
+
+		$table = ['foo' => $this->createMock(Node::class)];
+
+		$node = $this->createMock(Node::class);
+
+		$res = $ref->assign($this->getMockSymbolTable($table), $node);
+
+		$this->assertSame($node, $res);
+	}
 }
