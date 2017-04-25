@@ -30,11 +30,19 @@ class Literal extends Identifier {}
 class Number extends Literal {}
 class Integer extends Number {}
 class Float extends Number {}
+
 class Boolean extends Literal {
 	public function repr() {
 		return $this->value ? 'TRUE' : 'FALSE';
 	}
 }
+
+class String extends Literal {
+	public function repr() {
+		return '"' . addcslashes($this->value,"\0..\37\42\134\177..\377") . '"';
+	}
+}
+
 class Null_ extends Literal {
 	static protected $null_;
 
@@ -47,11 +55,5 @@ class Null_ extends Literal {
 			static::$null_ = new static(NULL);
 		}
 		return static::$null_;
-	}
-}
-
-class String extends Literal {
-	public function repr() {
-		return '"' . addcslashes($this->value, "\0..\37!@\177..\377") . '"';
 	}
 }
