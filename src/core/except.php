@@ -4,7 +4,9 @@ namespace PHPAST;
 
 class Exception extends \Exception {}
 
-class ReturnException extends Exception {
+class FlowException extends Exception {}
+
+class ReturnException extends FlowException {
 	protected $literal;
 
 	public function __construct(Literal $literal) {
