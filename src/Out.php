@@ -4,8 +4,9 @@ namespace PHPAST;
 
 class Out extends Builtin {
 
-	public function __construct(array $args, $label = NULL) {
-		parent::__construct('print', $args, $label);
+	public function __construct(array $args,
+	                            LiteralFactory $fac = NULL, $label = NULL) {
+		parent::__construct('print', $args, $fac, $label);
 	}
 
 	public function evaluate(SymbolTable $st) {
