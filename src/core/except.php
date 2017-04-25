@@ -33,6 +33,7 @@ class LoopException extends FlowException {
 }
 
 class ContinueException extends LoopException {}
+class BreakException extends LoopException {}
 
 class EvalException extends Exception {
 	protected $label;
