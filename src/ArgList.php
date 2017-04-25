@@ -5,10 +5,7 @@ namespace PHPAST;
 class ArgList extends \ArrayObject {
 
 	public function __construct(array $args, array $defaults = []) {
-		parent::__construct();
-		foreach ($args as $name => $value) {
-			$this[$name] = $value;
-		}
+		parent::__construct($args);
 		$this->defaults = $defaults;
 	}
 
