@@ -2,36 +2,29 @@
 
 namespace PHPAST;
 
-class ForOp extends Node {
+class ForOp extends WhileOp {
 	protected $pre;
-	protected $cond;
-	protected $post;
-	protected $node;
+	protected $prog;
 
 	public function __construct(Node $pre, Node $cond, Node $post,
 	                            Node $node, $label = NULL) {
-		parent::__construct($label);
+		// This will be our for body. Notice that the body of the loop is
+		// Prog, which gets the post code appended so that it will run last
+		// at every loop.
+		$this->prog = new Prog([$node, $post]);
+		parent::__construct($cond, $this->prog, $label);
 		$this->pre = $pre;
-		$this->cond = $cond;
-		$this->post = $post;
-		$this->node = $node;
 	}
 
 	public function evaluate(SymbolTable $st) {
-
-		$res = Null_::get();
-		for ($this->pre->evaluate($st);
-		     (string)$this->cond->evaluate($st);
-		     $this->post->evaluate($st)) {
-			$res = $this->node->evaluate($st);
-		}
-		return $res;
+		$this->pre->evaluate($st);
+		return parent::evaluate($st);
 	}
 
 	public function __toString() {
 		return 'For (' . $this->pre
 			. '; ' . $this->cond
-			. '; ' . $this->post . ")\n"
-			. str_replace("\n", "\n\t", $this->node);
+			. '; ' . $this->prog[1] . ")\n\t"
+			. str_replace("\n", "\n\t", $this->prog[0]);
 	}
 }
