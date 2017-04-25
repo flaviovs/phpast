@@ -3,13 +3,13 @@
 namespace PHPAST;
 
 class ArgList extends \ArrayObject {
-	protected $defaults = [];
 
-	public function __construct(array $args) {
+	public function __construct(array $args, array $defaults = []) {
 		parent::__construct();
 		foreach ($args as $name => $value) {
 			$this[$name] = $value;
 		}
+		$this->defaults = $defaults;
 	}
 
 	public function getDefaults() {
