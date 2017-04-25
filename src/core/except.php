@@ -56,3 +56,4 @@ class EvalException extends Exception {
 class DivisionByZeroException extends EvalException {}
 class TypeException extends EvalException {}
 class NameException extends EvalException {}
+class UnderflowException extends EvalException {}
