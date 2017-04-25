@@ -1,13 +1,13 @@
 <?php
 
-use PHPAST\ContinueException;
+use PHPAST\LoopException;
 use PHPAST\Integer;
 
-class ContinueExceptionTest extends PHPUnit\Framework\TestCase {
+class LoopExceptionTest extends PHPUnit\Framework\TestCase {
 
 	public function testGetBlocks() {
 		$blocks = $this->createMock(Integer::class);
-		$ex = new ContinueException($blocks);
+		$ex = new LoopException($blocks);
 		$this->assertSame($blocks, $ex->getBlocks());
 	}
 }

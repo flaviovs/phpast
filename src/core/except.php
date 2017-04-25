@@ -19,7 +19,7 @@ class ReturnException extends FlowException {
 	}
 }
 
-class ContinueException extends FlowException {
+class LoopException extends FlowException {
 	protected $blocks;
 
 	public function __construct(Integer $blocks = NULL) {
@@ -32,6 +32,7 @@ class ContinueException extends FlowException {
 	}
 }
 
+class ContinueException extends LoopException {}
 
 class EvalException extends Exception {
 	protected $label;
