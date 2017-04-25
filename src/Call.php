@@ -27,8 +27,8 @@ class Call extends Node {
 		foreach ($arglist as $arg) {
 			if (isset($this->args[$arg])) {
 				$local_st[$arg] = $this->args[$arg]->evaluate($st);
-			} else if (isset($this->defaults[$arg])) {
-				$local_st[$arg] = $this->defaults[$arg]->evaluate($st);
+			} else if (isset($defaults[$arg])) {
+				$local_st[$arg] = $defaults[$arg]->evaluate($st);
 			} else {
 				throw new NameException($this->label,
 				                        "Missing function argument: $arg");
