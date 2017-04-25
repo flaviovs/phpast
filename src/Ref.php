@@ -11,7 +11,7 @@ class Ref extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		return $st[$this->name->evaluate($st)->repr()]->evaluate($st);
+		return $st[(string)$this->name->evaluate($st)];
 	}
 
 	public function __toString() {
