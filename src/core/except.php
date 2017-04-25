@@ -19,6 +19,20 @@ class ReturnException extends FlowException {
 	}
 }
 
+class ContinueException extends FlowException {
+	protected $blocks;
+
+	public function __construct(Integer $blocks = NULL) {
+		parent::__construct();
+		$this->blocks = $blocks;
+	}
+
+	public function getBlocks() {
+		return $this->blocks;
+	}
+}
+
+
 class EvalException extends Exception {
 	protected $label;
 
