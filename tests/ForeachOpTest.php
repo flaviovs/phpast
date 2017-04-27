@@ -5,6 +5,9 @@ use PHPAST\ForeachOp;
 use PHPAST\VList;
 use PHPAST\Ref;
 use PHPAST\Identifier;
+use PHPAST\Prog;
+use PHPAST\ContinueOp;
+use PHPAST\BreakOp;
 
 class ForeachOpTest extends NodeTest {
 
@@ -12,7 +15,7 @@ class ForeachOpTest extends NodeTest {
 	 * Standard NodeTest node creation
 	 */
 	public function createNode($label = NULL) {
-		return new ForeachOp($this->createMock(Ref::class),
+		return new ForeachOp($this->createMock(VList::class),
 		                     $this->createMock(Ref::class),
 		                     $this->createMock(Ref::class),
 		                     $this->createMock(Node::class),
@@ -26,7 +29,7 @@ class ForeachOpTest extends NodeTest {
 		$n1 = $this->createMock(Node::class);
 		$n2 = $this->createMock(Node::class);
 
-		$table['list'] = new VList(['n1' => $n1, 'n2' => $n2]);
+		$vlist = new VList(['n1' => $n1, 'n2' => $n2]);
 
 		$k = new Ref(new Identifier('k'));
 		$v = new Ref(new Identifier('v'));
@@ -39,12 +42,10 @@ class ForeachOpTest extends NodeTest {
 			->will($this->returnCallback(
 				       function ($st) use (&$table, &$keys, &$values) {
 					       $keys[] = $table['k'];
-					       $values[] = $table['v'];;
+					       $values[] = $table['v'];
 				       }));
 
-		$op = new ForeachOp(new Ref(new Identifier('list')),
-		                    $k, $v,
-		                    $node);
+		$op = new ForeachOp($vlist, $k, $v, $node);
 		$op->evaluate($st);
 
 		$this->assertEquals(['n1', 'n2'], $keys);
