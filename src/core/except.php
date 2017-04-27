@@ -30,6 +30,18 @@ class LoopException extends FlowException {
 	public function getBlocks() {
 		return $this->blocks;
 	}
+
+	public function current() {
+		return !$this->blocks || (string)$this->blocks <= 1;
+	}
+
+	public function advance() {
+		if ((string)$this->blocks <= 1) {
+			throw new UnderflowException($this->blocks->getLabel());
+		}
+		$this->blocks = new Integer((string)$this->blocks - 1,
+		                            $this->blocks->getLabel());
+	}
 }
 
 class ContinueException extends LoopException {}
