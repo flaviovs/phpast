@@ -2,6 +2,9 @@
 
 use PHPAST\Node;
 use PHPAST\WhileOp;
+use PHPAST\ContinueOp;
+use PHPAST\BreakOp;
+use PHPAST\Prog;
 
 class WhileOpTest extends NodeTest {
 

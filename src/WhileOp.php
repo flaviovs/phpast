@@ -2,20 +2,18 @@
 
 namespace PHPAST;
 
-class WhileOp extends Node {
+class WhileOp extends LoopOp {
 	protected $cond;
-	protected $node;
 
 	public function __construct(Node $cond, Node $node, $label = NULL) {
-		parent::__construct($label);
+		parent::__construct($node, $label);
 		$this->cond = $cond;
-		$this->node = $node;
 	}
 
 	public function evaluate(SymbolTable $st) {
 		$res = Null_::get();
-		while ((string)$this->cond->evaluate($st)) {
-			$res = $this->node->evaluate($st);
+		while ((string)$this->cond->evaluate($st) && $this->loop($st, $res)) {
+			// NOTHING
 		}
 		return $res;
 	}
