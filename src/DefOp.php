@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Def extends Node {
+class DefOp extends Node {
 	protected $name;
 	protected $func;
 

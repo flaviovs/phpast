@@ -1,11 +1,11 @@
 <?php
 
-use PHPAST\Def;
+use PHPAST\DefOp;
 use PHPAST\Func;
 
-class DefTest extends NodeTest {
+class DefOpTest extends NodeTest {
 	public function createNode($label = NULL) {
-		return new Def('foo', $this->createMock(Func::class), $label);
+		return new DefOp('foo', $this->createMock(Func::class), $label);
 	}
 
 	public function testEvaluate() {
@@ -14,7 +14,7 @@ class DefTest extends NodeTest {
 
 		$func = $this->createMock(Func::class);
 
-		$def = new Def('foo', $func);
+		$def = new DefOp('foo', $func);
 
 		$def->evaluate($st);
 
