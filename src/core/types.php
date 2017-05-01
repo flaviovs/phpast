@@ -8,7 +8,7 @@ interface LiteralFactory {
 	public function create($mixed, $label = NULL);
 }
 
-class Identifier extends Node {
+class ValueWrapper extends Node {
 	protected $value;
 
 	public function __construct($value, $label = NULL) {
@@ -25,7 +25,9 @@ class Identifier extends Node {
 	}
 }
 
-class Literal extends Identifier {}
+class Identifier extends ValueWrapper {}
+
+class Literal extends ValueWrapper {}
 
 class Number extends Literal {}
 class Integer extends Number {}

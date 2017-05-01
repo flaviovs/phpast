@@ -1,11 +1,11 @@
 <?php
 
-use PHPAST\Identifier;
+use PHPAST\ValueWrapper;
 
-class IdentifierTest extends NodeTest {
+class ValueWrapperTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new Identifier('test node', $label);
+		return new ValueWrapper('test node', $label);
 	}
 
 	public function testEvaluate() {
@@ -15,7 +15,7 @@ class IdentifierTest extends NodeTest {
 	}
 
 	public function testToString() {
-		$node = new Identifier('foo');
+		$node = new ValueWrapper('foo');
 		$this->assertEquals('foo', (string)$node);
 	}
 }

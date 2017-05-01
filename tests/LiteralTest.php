@@ -2,7 +2,7 @@
 
 use PHPAST\Literal;
 
-class LiteralTest extends IdentifierTest {
+class LiteralTest extends ValueWrapperTest {
 
 	public function createNode($label = NULL) {
 		return new Literal('test node', $label);
