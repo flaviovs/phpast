@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Eq extends BinaryOp {
+class EqOp extends BinaryOp {
 
 	public function evaluate(SymbolTable $st) {
 		return (string)$this->node1->evaluate($st) == (string)$this->node2->evaluate($st);
