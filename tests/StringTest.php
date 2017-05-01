@@ -8,9 +8,9 @@ class StringTest extends NumberTest {
 		return new String(TRUE, $label);
 	}
 
-	public function testRepr() {
+	public function testToString() {
 		$node = new String('abc');
-		$this->assertEquals('"abc"', $node->repr());
+		$this->assertEquals('"abc"', (string)$node);
 	}
 
 	public function escapedStringsDataProvider() {
@@ -37,6 +37,6 @@ class StringTest extends NumberTest {
 		$node = new String($string);
 		// Note: the '"' (double-quotes) doesn't need to be in the
 		// 'expected' parameter.
-		$this->assertEquals('"' . $expected . '"', $node->repr());
+		$this->assertEquals('"' . $expected . '"', (string)$node);
 	}
 }

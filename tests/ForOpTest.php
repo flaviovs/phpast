@@ -17,10 +17,10 @@ class ForOpTest extends NodeTest {
 	}
 
 	public function testEvaluate() {
-		$pre = $this->createMock(ForOp::class);
-		$cond = $this->createMock(ForOp::class);
-		$post = $this->createMock(ForOp::class);
-		$node = $this->createMock(ForOp::class);
+		$pre = $this->createMock(Node::class);
+		$cond = $this->createMock(Node::class);
+		$post = $this->createMock(Node::class);
+		$node = $this->createMock(Node::class);
 
 		$i = NULL;
 
@@ -32,7 +32,7 @@ class ForOpTest extends NodeTest {
 		$cond
 			->method('evaluate')
 			->will($this->returnCallback(function() use (&$i) {
-						return $i < 10;
+						return $this->getMockLiteral($i < 10);
 					}));
 		$post
 			->method('evaluate')

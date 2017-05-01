@@ -27,20 +27,24 @@ class ValueWrapper extends Node {
 
 class Identifier extends ValueWrapper {}
 
-class Literal extends ValueWrapper {}
+class Literal extends ValueWrapper {
+	public function getValue() {
+		return $this->value;
+	}
+}
 
 class Number extends Literal {}
 class Integer extends Number {}
 class Float extends Number {}
 
 class Boolean extends Literal {
-	public function repr() {
+	public function __toString() {
 		return $this->value ? 'TRUE' : 'FALSE';
 	}
 }
 
 class String extends Literal {
-	public function repr() {
+	public function __toString() {
 		return '"' . addcslashes($this->value,"\0..\37\42\134\177..\377") . '"';
 	}
 }
@@ -48,7 +52,7 @@ class String extends Literal {
 class Null_ extends Literal {
 	static protected $null_;
 
-	public function repr() {
+	public function __toString() {
 		return 'NULL';
 	}
 

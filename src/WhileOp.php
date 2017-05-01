@@ -12,7 +12,8 @@ class WhileOp extends LoopOp {
 
 	public function evaluate(SymbolTable $st) {
 		$res = Null_::get();
-		while ((string)$this->cond->evaluate($st) && $this->loop($st, $res)) {
+		while ($this->cond->evaluate($st)->getValue()
+		       && $this->loop($st, $res)) {
 			// NOTHING
 		}
 		return $res;

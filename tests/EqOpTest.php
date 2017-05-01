@@ -15,13 +15,13 @@ class EqOpTest extends NodeTest {
 	public function testEvaluateTrue() {
 		$op = new EqOp(new Integer(2), new Integer(2));
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertTrue((boolean)(string)$res);
+		$this->assertTrue($res->getValue());
 	}
 
 	public function testEvaluateFalse() {
 		$op = new EqOp(new Integer(1), new Integer(2));
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertFalse((boolean)(string)$res);
+		$this->assertFalse($res->getValue());
 	}
 
 	public function testToString() {

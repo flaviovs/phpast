@@ -8,9 +8,9 @@ class NullTest extends LiteralTest {
 		return new Null_(NULL, $label);
 	}
 
-	public function testRepr() {
+	public function testToString() {
 		$node = new Null_(NULL);
-		$this->assertEquals('NULL', $node->repr());
+		$this->assertEquals('NULL', (string)$node);
 	}
 
 	public function testSingleInstanceValue() {

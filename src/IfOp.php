@@ -17,7 +17,7 @@ class IfOp extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		if ((string)$this->cond->evaluate($st)) {
+		if ($this->cond->evaluate($st)->getValue()) {
 			return $this->nodet->evaluate($st);
 		}
 		if ($this->nodef) {
@@ -27,11 +27,11 @@ class IfOp extends Node {
 	}
 
 	public function __toString() {
-		$out = "If " . $this->cond->repr() . " Then\n\t" .
-			str_replace("\n", "\n\t", $this->nodet->repr());
+		$out = "If " . $this->cond . " Then\n\t" .
+			str_replace("\n", "\n\t", $this->nodet);
 		if ($this->nodef) {
 			$out .= "\nElse\n\t"
-				. str_replace("\n", "\n\t", $this->nodef->repr());
+				. str_replace("\n", "\n\t", $this->nodef);
 		}
 		return $out;
 	}

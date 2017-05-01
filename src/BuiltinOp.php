@@ -33,9 +33,9 @@ class BuiltinOp extends Node {
 
 	public function evaluate(SymbolTable $st) {
 		$res = call_user_func_array($this->func,
-									array_map(function(Node $n) {
-											return $n->repr();
-										}, $this->args));;
+		                            array_map(function(Node $n) {
+				                            return $n->getValue();
+			                            }, $this->args));
 		if (!($res instanceof Node)) {
 			// FIXME: check exception, rethrow with our label.
 			$res = $this->fac->create($res, $this->label);
@@ -44,10 +44,7 @@ class BuiltinOp extends Node {
 	}
 
 	protected function argsToString() {
-		return implode(", ",
-		               array_map(function($a) {
-				               return $a->repr();
-			               }, $this->args));
+		return implode(", ", $this->args);
 	}
 
 	public function __toString() {

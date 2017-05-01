@@ -9,9 +9,9 @@ class NopTest extends NodeTest {
 		return new Nop($label);
 	}
 
-	public function testRepr() {
+	public function testToString() {
 		$nop = new Nop();
-		$this->assertEquals('Nop', $nop->repr());
+		$this->assertEquals('Nop', (string)$nop);
 	}
 
 	public function testEvaluate() {

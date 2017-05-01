@@ -19,7 +19,7 @@ class ContinueOp extends Node {
 	public function __toString() {
 		$out = 'Continue';
 		if ($this->val) {
-			$out .= ' ' . $this->val->repr();
+			$out .= ' ' . $this->val;
 		}
 		return $out;
 	}

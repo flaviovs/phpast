@@ -23,6 +23,6 @@ class DefOp extends Node {
 
 	public function __toString() {
 		return "Def $this->name"
-			. str_replace("\n", "\n\t", $this->func->repr());
+			. str_replace("\n", "\n\t", $this->func);
 	}
 }

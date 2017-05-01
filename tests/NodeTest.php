@@ -1,7 +1,12 @@
 <?php
 
 use PHPAST\Node;
-use PHPAST\Literal;
+use PHPAST\Integer;
+use PHPAST\Float;
+use PHPAST\Boolean;
+use PHPAST\String;
+use PHPAST\Null_;
+use PHPAST\Identifier;
 use PHPAST\SymbolTable;
 
 class NodeTestHelper extends Node {
@@ -14,22 +19,64 @@ class NodeTest extends PHPUnit\Framework\TestCase {
 		return new NodeTestHelper($label);
 	}
 
-	protected function getMockLiteral($ret = NULL) {
-//		$builder = $this->getMockBuilder(Literal::class);
-//		$builder->setMethods(['__toString']);
-//		$lit = $builder->getMock();
+	protected function getMockIdentifier($name) {
+		$mock = $this->createMock(Identifier::class);
+		$mock
+			->method('evaluate')
+			->willReturn($mock);
+		$mock
+			->method('getValue')
+			->willReturn($name);
+		$mock
+			->method('__toString')
+			->willReturn($name);
+		return $mock;
+	}
 
-		$lit = $this->createMock(Literal::class);
-		$ret = $ret ?: $lit;
+	protected function getMockLiteral($ret = NULL) {
+		$type = gettype($ret);
+
+		$str = (string)$ret;
+		switch ($type) {
+		case 'boolean':
+			$lit = $this->createMock(Boolean::class);
+			$str = $ret ? 'TRUE' : 'FALSE';
+			break;
+
+		case 'integer':
+			$lit = $this->createMock(Integer::class);
+			break;
+
+		case 'double':
+			$lit = $this->createMock(Float::class);
+			break;
+
+		case 'string':
+			$lit = $this->createMock(String::class);
+			$str = '"' . addslashes($ret) . '"';
+			break;
+
+		case 'NULL':
+			$lit = $this->createMock(Null_::class);
+			$str = 'NULL';
+			break;
+
+		default:
+			throw new \RuntimeException($type);
+		}
+
 		$lit
 			->method('evaluate')
+			->willReturn($lit);
+
+		$lit
+			->method('getValue')
 			->willReturn($ret);
-		// As of PHP 5.6, PHPUnit will bail if the cast is done inside the
-		// willReturn() call.
-		$sret = (string)$ret;
+
 		$lit
 			->method('__toString')
-			->willReturn($sret);
+			->willReturn($str);
+
 		return $lit;
 	}
 
@@ -87,10 +134,4 @@ class NodeTest extends PHPUnit\Framework\TestCase {
 		$node = $this->createNode($label);
 		$this->assertEquals($label, $node->getLabel());
 	}
-
-	public function testRepr() {
-		$node = $this->createNode();
-		$this->assertEquals((string)$node, $node->repr());
-	}
-
 }

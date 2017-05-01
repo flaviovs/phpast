@@ -8,15 +8,16 @@ class DivOp extends ArithBinaryOp {
 		$lit1 = $this->node1->evaluate($st);
 		$lit2 = $this->node2->evaluate($st);
 
-		if ((string)$lit2 == 0) {
+		$denom = $lit2->getValue();
+		if ($denom == 0) {
 			throw new DivisionByZeroException($this->label,
 			                                  "Division by zero");
 		}
 
-		return $this->arithPromote((string)$lit1 / (string)$lit2, $lit1, $lit2);
+		return $this->arithPromote($lit1->getValue() / $denom, $lit1, $lit2);
 	}
 
 	public function __toString() {
-		return '(' . $this->node1->repr() . ' / ' . $this->node2->repr() . ')';
+		return '(' . $this->node1 . ' / ' . $this->node2 . ')';
 	}
 }

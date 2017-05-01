@@ -15,6 +15,6 @@ class ReturnOp extends Node {
 	}
 
 	public function __toString() {
-		return 'Return ' . $this->val->repr();
+		return 'Return ' . $this->val;
 	}
 }

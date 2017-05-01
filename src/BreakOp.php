@@ -19,7 +19,7 @@ class BreakOp extends Node {
 	public function __toString() {
 		$out = 'Break';
 		if ($this->val) {
-			$out .= ' ' . $this->val->repr();
+			$out .= ' ' . $this->val;
 		}
 		return $out;
 	}

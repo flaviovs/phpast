@@ -4,7 +4,6 @@ use PHPAST\Node;
 use PHPAST\ForeachOp;
 use PHPAST\VList;
 use PHPAST\Ref;
-use PHPAST\Identifier;
 use PHPAST\Prog;
 use PHPAST\ContinueOp;
 use PHPAST\BreakOp;
@@ -31,8 +30,8 @@ class ForeachOpTest extends NodeTest {
 
 		$vlist = new VList(['n1' => $n1, 'n2' => $n2]);
 
-		$k = new Ref(new Identifier('k'));
-		$v = new Ref(new Identifier('v'));
+		$k = new Ref($this->getMockIdentifier('k'));
+		$v = new Ref($this->getMockIdentifier('v'));
 
 		$node = $this->createMock(Node::class);
 		$keys = [];

@@ -20,6 +20,6 @@ class OffsetRef extends Ref {
 	}
 
 	public function __toString() {
-		return '[' . $this->name->repr() . ']';
+		return '[' . $this->name . ']';
 	}
 }

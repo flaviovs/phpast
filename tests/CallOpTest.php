@@ -4,7 +4,6 @@ use PHPAST\CallOp;
 use PHPAST\Ref;
 use PHPAST\Func;
 use PHPAST\ArgList;
-use PHPAST\Identifier;
 use PHPAST\Integer;
 use PHPAST\ReturnException;
 
@@ -40,7 +39,7 @@ class CallOpTest extends NodeTest {
 
 		$args = ['one' => new Integer(1)];
 
-		$call = new CallOp(new Ref(new Identifier('foo')),
+		$call = new CallOp(new Ref($this->getMockIdentifier('foo')),
 		                   $this->getMockSymbolTable($args));
 
 		$this->assertEquals(12345, (string)$call->evaluate($st));
@@ -69,7 +68,7 @@ class CallOpTest extends NodeTest {
 
 		$table['foo'] = $func;
 
-		$call = new CallOp(new Ref(new Identifier('foo')),
+		$call = new CallOp(new Ref($this->getMockIdentifier('foo')),
 		                   $this->getMockSymbolTable());
 
 		$this->assertEquals(67890, (string)$call->evaluate($st));

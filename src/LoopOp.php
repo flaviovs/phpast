@@ -38,6 +38,6 @@ class LoopOp extends Node {
 	}
 
 	public function __toString() {
-		return "Loop\n\t" . str_replace("\n", "\n\t", $this->node->repr());
+		return "Loop\n\t" . str_replace("\n", "\n\t", $this->node);
 	}
 }

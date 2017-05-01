@@ -2,7 +2,6 @@
 
 use PHPAST\AssignOp;
 use PHPAST\Ref;
-use PHPAST\Identifier;
 use PHPAST\Node;
 use PHPAST\String;
 
@@ -17,10 +16,10 @@ class AssignOpTest extends NodeTest {
 	public function testEvaluate() {
 		$storage = [];
 		$st = $this->getMockSymbolTable($storage);
-		$ass = new AssignOp(new Ref(new Identifier('foo')),
+		$ass = new AssignOp(new Ref($this->getMockIdentifier('foo')),
 		                    new String('zee'));
 		$ass->evaluate($st);
 
-		$this->assertEquals('zee', $storage['foo']);
+		$this->assertEquals('zee', $storage['foo']->getValue());
 	}
 }

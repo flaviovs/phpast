@@ -8,11 +8,9 @@ use PHPAST\VList;
 class OffsetRefTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		$id = $this->createMock(Identifier::class);
-		$id
-			->method('repr')
-			->willReturn((string)$id);
-		return new OffsetRef($this->createMock(VList::class), $id, $label);
+		return new OffsetRef($this->createMock(VList::class),
+		                     $this->getMockIdentifier('foo'),
+		                     $label);
 	}
 
 	public function testEvaluate() {

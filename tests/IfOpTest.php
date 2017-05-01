@@ -3,6 +3,7 @@
 use PHPAST\Node;
 use PHPAST\IfOp;
 use PHPAST\Null_;
+use PHPAST\Boolean;
 
 class IfOpTest extends NodeTest {
 
@@ -16,11 +17,19 @@ class IfOpTest extends NodeTest {
 		                $label);
 	}
 
+	protected function getMockTrue() {
+		return $this->getMockLiteral(TRUE);
+	}
+
+	protected function getMockFalse() {
+		return $this->getMockLiteral(FALSE);
+	}
+
 	public function testEvaluateTrue() {
 		$true = $this->createMock(Node::class);
 		$true
 			->method('evaluate')
-			->willReturn(1);
+			->willReturn($this->getMockTrue());
 
 		$nodet = $this->createMock(Node::class);
 		$nodet
@@ -43,7 +52,7 @@ class IfOpTest extends NodeTest {
 		$false = $this->createMock(Node::class);
 		$false
 			->method('evaluate')
-			->willReturn(0);
+			->willReturn($this->getMockFalse());
 
 		$nodet = $this->createMock(Node::class);
 		$nodet
@@ -66,7 +75,7 @@ class IfOpTest extends NodeTest {
 		$false = $this->createMock(Node::class);
 		$false
 			->method('evaluate')
-			->willReturn(0);
+			->willReturn($this->getMockFalse());
 
 		$nodet = $this->createMock(Node::class);
 		$nodet

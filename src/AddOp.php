@@ -8,10 +8,11 @@ class AddOp extends ArithBinaryOp {
 		$lit1 = $this->node1->evaluate($st);
 		$lit2 = $this->node2->evaluate($st);
 
-		return $this->arithPromote((string)$lit1 + (string)$lit2, $lit1, $lit2);
+		return $this->arithPromote($lit1->getValue() + $lit2->getValue(),
+		                           $lit1, $lit2);
 	}
 
 	public function __toString() {
-		return '(' . $this->node1->repr() . ' + ' . $this->node2->repr() . ')';
+		return '(' . $this->node1 . ' + ' . $this->node2 . ')';
 	}
 }

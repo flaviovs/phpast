@@ -7,10 +7,8 @@ class PowerOp extends ArithBinaryOp {
 		$lit1 = $this->node1->evaluate($st);
 		$lit2 = $this->node2->evaluate($st);
 
-		$n1 = (string)$lit1;
-		$n2 = (string)$lit2;
-
-		return $this->arithPromote($n1 ** $n2, $lit1, $lit2);
+		return $this->arithPromote($lit1->getValue() ** $lit2->getValue(),
+		                           $lit1, $lit2);
 	}
 
 	public function __toString() {

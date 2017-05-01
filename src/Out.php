@@ -11,7 +11,7 @@ class Out extends BuiltinOp {
 
 	public function evaluate(SymbolTable $st) {
 		foreach ($this->args as $arg) {
-			echo $arg->evaluate($st);
+			echo $arg->evaluate($st)->getValue();
 		}
 	}
 

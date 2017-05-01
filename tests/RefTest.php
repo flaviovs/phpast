@@ -7,19 +7,11 @@ use PHPAST\Node;
 class RefTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		$id = $this->createMock(Identifier::class);
-		$id
-			->method('repr')
-			->willReturn((string)$id);
-		return new Ref($id, $label);
+		return new Ref($this->getMockIdentifier('foo'), $label);
 	}
 
 	public function testEvaluate() {
-		$id = $this->createMock(Identifier::class);
-		$id
-			->method('evaluate')
-			->willReturn('foo');
-
+		$id = $this->getMockIdentifier('foo');
 		$ref = new Ref($id);
 
 		$node = $this->createMock(Node::class);
@@ -31,20 +23,13 @@ class RefTest extends NodeTest {
 	}
 
 	public function testToString() {
-		$id = $this->createMock(Identifier::class);
-		$id
-			->method('repr')
-			->willReturn('foo');
+		$id = $this->getMockIdentifier('foo');
 		$op = new Ref($id);
 		$this->assertEquals("foo", (string)$op);
 	}
 
 	public function testAssign() {
-		$id = $this->createMock(Identifier::class);
-		$id
-			->method('repr')
-			->willReturn('foo');
-
+		$id = $this->getMockIdentifier('foo');
 		$ref = new Ref($id);
 
 		$table = ['foo' => $this->createMock(Node::class)];

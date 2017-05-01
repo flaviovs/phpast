@@ -8,10 +8,10 @@ class BooleanTest extends NumberTest {
 		return new Boolean(TRUE, $label);
 	}
 
-	public function testRepr() {
+	public function testToString() {
 		$node = new Boolean(TRUE);
-		$this->assertEquals('TRUE', $node->repr());
+		$this->assertEquals('TRUE', (string)$node);
 		$node = new Boolean(FALSE);
-		$this->assertEquals('FALSE', $node->repr());
+		$this->assertEquals('FALSE', (string)$node);
 	}
 }

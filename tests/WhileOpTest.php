@@ -18,15 +18,17 @@ class WhileOpTest extends NodeTest {
 	}
 
 	public function testEvaluate() {
-		$cond = $this->createMock(WhileOp::class);
-		$node = $this->createMock(WhileOp::class);
+		$cond = $this->createMock(Node::class);
+		$node = $this->createMock(Node::class);
 
 		$i = 0;
 
+		$that = $this;
+
 		$cond
 			->method('evaluate')
-			->will($this->returnCallback(function() use (&$i) {
-						return $i < 10;
+			->will($this->returnCallback(function() use (&$i, $that) {
+						return $that->getMockLiteral($i < 10);
 					}));
 
 		$calls = [];

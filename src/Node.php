@@ -19,7 +19,8 @@ abstract class Node {
 		return '<' . get_class($this) . ' object>';
 	}
 
-	public function repr() {
-		return (string)$this;
+	public function getValue() {
+		throw new TypeException($this->label,
+		                        get_class($this) . ' has no value');
 	}
 }
