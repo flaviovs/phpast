@@ -14,16 +14,14 @@ require __DIR__ . '/../vendor/autoload.php';
 $factorial_id = new Identifier('factorial');
 $factorial = new Func(new ArgList(['num']), []);
 $num = new Identifier('num');
-$factorial[] = new IfOp(new Eq(new Ref($num), new Integer(1)),
-                        new Prog(
-	                        [
-		                        new ReturnOp(new Integer(1)),
-	                        ])
-);
+$factorial[] = new IfOp(new LtOp(new Ref($num), new Integer(1)),
+                        new ReturnOp(new Integer(0)));
+$factorial[] = new IfOp(new EqOp(new Ref($num), new Integer(1)),
+                        new ReturnOp(new Integer(1)));
 
 $factorial[] = new ReturnOp(
 	new MulOp(new Ref($num),
-	          new Call(
+	          new CallOp(
 		          new Ref($factorial_id),
 		          new FlatSymbolTable(
 			          [
@@ -37,24 +35,28 @@ $factorial[] = new ReturnOp(
 $prog = new Prog();
 
 // Define the factorial function.
-$prog[] = new Def($factorial_id, $factorial);
+$prog[] = new DefOp($factorial_id, $factorial);
 
 // Now let's calculate some factorials.
-$prog[] = new Outln(
-	[
-		"5! = ",
-		new Call(new Ref($factorial_id),
-		         new FlatSymbolTable(['num' => new Integer(5)]))
-	]
-);
+$offset_ref = new Ref(new Identifier('offset'));
+$value_ref = new Ref(new Identifier('value'));
 
-$prog[] = new Outln(
+$loop = new Outln(
 	[
-		"15! = ",
-		new Call(new Ref($factorial_id),
-		         new FlatSymbolTable(['num' => new Integer(15)]))
+		$value_ref,
+		" = ",
+		new CallOp(new Ref($factorial_id),
+		           new FlatSymbolTable(['num' => $value_ref]))
 	]
 );
+$prog[] = new ForeachOp(new VList([
+									  new Integer(0),
+									  new Integer(1),
+									  new Integer(5),
+									  new Integer(10),
+									  new Integer(15),
+								  ]),
+						$offset_ref, $value_ref, $loop);
 
 // Print the program.
 print "Program:\n";
