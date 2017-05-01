@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Assignment extends Node {
+class AssignOp extends Node {
 	protected $ref;
 	protected $value;
 
