@@ -1,6 +1,6 @@
 <?php
 
-use PHPAST\Call;
+use PHPAST\CallOp;
 use PHPAST\Ref;
 use PHPAST\Func;
 use PHPAST\ArgList;
@@ -8,11 +8,11 @@ use PHPAST\Identifier;
 use PHPAST\Integer;
 use PHPAST\ReturnException;
 
-class CallTest extends NodeTest {
+class CallOpTest extends NodeTest {
 	public function createNode($label = NULL) {
-		return new Call($this->createMock(Ref::class),
-		                $this->getMockSymbolTable(),
-		                $label);
+		return new CallOp($this->createMock(Ref::class),
+		                  $this->getMockSymbolTable(),
+		                  $label);
 	}
 
 	public function testEvaluate() {
@@ -40,8 +40,8 @@ class CallTest extends NodeTest {
 
 		$args = ['one' => new Integer(1)];
 
-		$call = new Call(new Ref(new Identifier('foo')),
-		                 $this->getMockSymbolTable($args));
+		$call = new CallOp(new Ref(new Identifier('foo')),
+		                   $this->getMockSymbolTable($args));
 
 		$this->assertEquals(12345, (string)$call->evaluate($st));
 	}
@@ -69,8 +69,8 @@ class CallTest extends NodeTest {
 
 		$table['foo'] = $func;
 
-		$call = new Call(new Ref(new Identifier('foo')),
-		                 $this->getMockSymbolTable());
+		$call = new CallOp(new Ref(new Identifier('foo')),
+		                   $this->getMockSymbolTable());
 
 		$this->assertEquals(67890, (string)$call->evaluate($st));
 	}

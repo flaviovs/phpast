@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Call extends Node {
+class CallOp extends Node {
 	protected $ref;
 	protected $args;
 
