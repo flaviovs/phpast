@@ -1,21 +1,21 @@
 <?php
 
-use PHPAST\Builtin;
+use PHPAST\BuiltinOp;
 
-class BuiltTest extends NodeTest {
+class BuiltOpTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new Builtin('foo', [], NULL, $label);
+		return new BuiltinOp('foo', [], NULL, $label);
 	}
 
 	public function testEvaluate() {
-		$b = new Builtin("pow", [3, 5]);
+		$b = new BuiltinOp("pow", [3, 5]);
 		$res = $b->evaluate($this->getMockSymbolTable());
 		$this->assertEquals(pow(3, 5), (string)$res);
 	}
 
 	public function testToString() {
-		$b = new Builtin("pow", [3, 5]);
+		$b = new BuiltinOp("pow", [3, 5]);
 		$this->assertEquals("<builtin \"pow\">(3, 5)", (string)$b);
 	}
 

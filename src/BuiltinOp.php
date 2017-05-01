@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Builtin extends Node {
+class BuiltinOp extends Node {
 	protected $func;
 	protected $args;
 	protected $fac;

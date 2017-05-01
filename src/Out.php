@@ -2,7 +2,7 @@
 
 namespace PHPAST;
 
-class Out extends Builtin {
+class Out extends BuiltinOp {
 
 	public function __construct(array $args,
 	                            LiteralFactory $fac = NULL, $label = NULL) {
