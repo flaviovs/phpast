@@ -27,9 +27,11 @@ class IfOp extends Node {
 	}
 
 	public function __toString() {
-		$out = "If " . $this->cond->repr() . " Then\n" . $this->nodet->repr();
+		$out = "If " . $this->cond->repr() . " Then\n\t" .
+			str_replace("\n", "\n\t", $this->nodet->repr());
 		if ($this->nodef) {
-			$out .= "\nElse\n" . $this->nodef->repr();
+			$out .= "\nElse\n\t"
+				. str_replace("\n", "\n\t", $this->nodef->repr());
 		}
 		return $out;
 	}
