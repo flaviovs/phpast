@@ -14,6 +14,11 @@ class PHPLiteralFactory implements LiteralFactory {
 			return new Integer($mixed, $label);
 
 		case 'double':
+			if (is_nan($mixed)) {
+				return Float::getNan();
+			} else if (is_infinite($mixed)) {
+				return Float::getInf();
+			}
 			return new Float($mixed, $label);
 
 		case 'string':

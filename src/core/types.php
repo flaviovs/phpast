@@ -35,7 +35,32 @@ class Literal extends ValueWrapper {
 
 class Number extends Literal {}
 class Integer extends Number {}
-class Float extends Number {}
+class Float extends Number {
+	static protected $nan;
+	static protected $inf;
+
+	static public function getNan() {
+		if (static::$nan === NULL) {
+			static::$nan = new self(NAN);
+		}
+		return static::$nan;
+	}
+
+	static public function getInf() {
+		if (static::$inf === NULL) {
+			static::$inf = new self(INF);
+		}
+		return static::$inf;
+	}
+
+	public function __toString() {
+		return (is_nan($this->value)
+		        ? 'NaN'
+		        : (is_infinite($this->value)
+		           ? 'Inf'
+		           : parent::__toString()));
+	}
+}
 
 class Boolean extends Literal {
 	static protected $true;

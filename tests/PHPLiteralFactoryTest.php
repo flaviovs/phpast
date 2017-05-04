@@ -28,6 +28,14 @@ class PHPLiteralFactoryTest extends PHPUnit\Framework\TestCase {
 		$this->assertInstanceOf(Float::class, $fac->create(1.1));
 	}
 
+	public function testFloatConstants() {
+		$fac = new PHPLiteralFactory();
+
+		$this->assertSame(Float::getNan(), $fac->create(NAN));
+		$this->assertSame(Float::getInf(), $fac->create(INF));
+	}
+
+
 	public function testString() {
 		$fac = new PHPLiteralFactory();
 		$this->assertInstanceOf(String::class, $fac->create("foo"));
