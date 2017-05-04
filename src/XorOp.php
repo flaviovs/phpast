@@ -5,9 +5,13 @@ namespace PHPAST;
 class XorOp extends BinaryOp {
 
 	public function evaluate(SymbolTable $st) {
-		return new Boolean($this->node1->evaluate($st)->getValue()
-		                   xor
-		                   $this->node2->evaluate($st)->getValue());
+		$r1 = $this->node1->evaluate($st)->getValue();
+		$r2 = $this->node2->evaluate($st)->getValue();
+		return (($r1 xor $r2)
+		        ? ($r1
+		           ? $this->node1
+		           : $this->node2)
+		        : Boolean::getFalse());
 	}
 
 	public function __toString() {

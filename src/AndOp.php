@@ -5,8 +5,11 @@ namespace PHPAST;
 class AndOp extends BinaryOp {
 
 	public function evaluate(SymbolTable $st) {
-		return new Boolean($this->node1->evaluate($st)->getValue()
-		                   && $this->node2->evaluate($st)->getValue());
+
+		return ($this->node1->evaluate($st)->getValue()
+		        && $this->node2->evaluate($st)->getValue()
+		        ? $this->node2
+		        : Boolean::getFalse());
 	}
 
 	public function __toString() {

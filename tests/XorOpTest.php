@@ -11,39 +11,36 @@ class XorOpTest extends NodeTest {
 		                 $label);
 	}
 
-	public function testEvaluateReturnsBoolean() {
-		$op = new XorOp($this->getMockLiteral(TRUE),
-		                $this->getMockLiteral(TRUE));
-		$this->assertInstanceOf(Boolean::class,
-		                        $op->evaluate($this->getMockSymbolTable()));
-	}
-
 	public function testEvaluateTrueTrue() {
-		$op = new XorOp($this->getMockLiteral(TRUE),
-		                $this->getMockLiteral(TRUE));
+		$l1 = $this->getMockLiteral(TRUE);
+		$l2 = $this->getMockLiteral(TRUE);
+		$op = new XorOp($l1, $l2);
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertFalse($res->getValue());
+		$this->assertSame(Boolean::getFalse(), $res);
 	}
 
 	public function testEvaluateTrueFalse() {
-		$op = new XorOp($this->getMockLiteral(TRUE),
-		                $this->getMockLiteral(FALSE));
+		$l1 = $this->getMockLiteral(TRUE);
+		$l2 = $this->getMockLiteral(FALSE);
+		$op = new XorOp($l1, $l2);
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertTrue($res->getValue());
+		$this->assertSame($l1, $res);
 	}
 
 	public function testEvaluateFalseTrue() {
-		$op = new XorOp($this->getMockLiteral(FALSE),
-		                $this->getMockLiteral(TRUE));
+		$l1 = $this->getMockLiteral(FALSE);
+		$l2 = $this->getMockLiteral(TRUE);
+		$op = new XorOp($l1, $l2);
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertTrue($res->getValue());
+		$this->assertSame($l2, $res);
 	}
 
 	public function testEvaluateFalseFalse() {
-		$op = new XorOp($this->getMockLiteral(FALSE),
-		                $this->getMockLiteral(FALSE));
+		$l1 = $this->getMockLiteral(FALSE);
+		$l2 = $this->getMockLiteral(FALSE);
+		$op = new XorOp($l1, $l2);
 		$res = $op->evaluate($this->getMockSymbolTable());
-		$this->assertFalse($res->getValue());
+		$this->assertSame(Boolean::getFalse(), $res);
 	}
 
 	public function testToString() {
