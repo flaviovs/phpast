@@ -12,8 +12,8 @@ class PHPLiteralFactoryTest extends PHPUnit\Framework\TestCase {
 
 	public function testBoolean() {
 		$fac = new PHPLiteralFactory();
-		$this->assertInstanceOf(Boolean::class, $fac->create(TRUE));
-		$this->assertInstanceOf(Boolean::class, $fac->create(FALSE));
+		$this->assertSame(Boolean::getTrue(), $fac->create(TRUE));
+		$this->assertSame(Boolean::getFalse(), $fac->create(FALSE));
 	}
 
 	public function testInteger() {

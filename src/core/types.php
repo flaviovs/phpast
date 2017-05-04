@@ -38,8 +38,25 @@ class Integer extends Number {}
 class Float extends Number {}
 
 class Boolean extends Literal {
+	static protected $true;
+	static protected $false;
+
 	public function __toString() {
 		return $this->value ? 'TRUE' : 'FALSE';
+	}
+
+	static public function getTrue() {
+		if (static::$true === NULL) {
+			static::$true = new Boolean(TRUE);
+		}
+		return static::$true;
+	}
+
+	static public function getFalse() {
+		if (static::$false === NULL) {
+			static::$false = new Boolean(FALSE);
+		}
+		return static::$false;
 	}
 }
 

@@ -8,7 +8,7 @@ class PHPLiteralFactory implements LiteralFactory {
 
 		switch ($type) {
 		case 'boolean':
-			return new Boolean($mixed, $label);
+			return $mixed ? Boolean::getTrue() : Boolean::getFalse();
 
 		case 'integer':
 			return new Integer($mixed, $label);
