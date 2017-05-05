@@ -1,0 +1,6 @@
+* Implement visitor pattern
+
+* Remove __toString() support, and implement string representation via
+  object visitors. This will allow several "decompiler" class to co-exist,
+  which in turn will allow the tree to be represented in several different
+  languages.
