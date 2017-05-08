@@ -55,7 +55,7 @@ Let's look at a basic example:
 // First, create a symbol table for our "program".
 $table = new PHPAST\FlatSymbolTable();
 
-// Our "program" will contain only the integer value 1. It is very dump, so
+// Our "program" will contain only the integer value 1. It is very dumb, so
 // once it is run (evaluated), it should just return the same integer value.
 $program = new PHPAST\Integer(1);
 
@@ -180,7 +180,6 @@ $table = new FlatSymbolTable(['foo' => new Float(0)]);
 // Create a 'foo' identifier. Identifiers work pretty much like as an ordinary
 // string value. All variable reference must be done using identifiers, so we
 // here we create one.
-
 $foo_id = new Identifier('foo');
 
 // Now create a reference to the variable.
@@ -262,27 +261,24 @@ Example:
 $foo_ref = new Ref(new Identifier('foo'));
 $bar_ref = new Ref(new Identifier('bar'));
 $prog = new Prog();
+
+// $foo = 0;
+// $bar = 1;
 $prog[] = new AssignOp($foo_ref, new Integer(0));
 $prog[] = new AssignOp($bar_ref, new Integer(1));
-// $bar += 2
+
+// $bar += 10
 $prog[] = new IncOp($foo_ref, 10);
+
+// for(;$foo > $bar; $foo -= 2) { print "foo = $foo\n"; }
 $prog[] = new ForOp(new Nop(),
                     new GtOp($foo_ref, $bar_ref),
                     new DecOp($foo_ref, 2),
                     new Outln([ "foo = ", $foo_ref ]));
 
 print "$prog\n";
-print_r($prog->evaluate(new FlatSymbolTable()));
-return;
-
-$table = new FlatSymbolTable(['foo' => new Float(0)]);
-$foo_ref = new Ref(new Identifier('foo'));
-$program = new Outln([
-	                     new PowerOp(new Float(3.14159),
-	                                 new Integer(2)),
-                     ]);
-print "$program\n";
 ```
+
 This should print:
 
     foo := 0
@@ -295,10 +291,10 @@ This should print:
 ## Func & ReturnOp ##
 
 `Func` nodes represent functions. Each function has an `ArgList` object that
-defines the arguments to the functional.
+defines the arguments the function expects.
 
-`Func` is a subclass of `Prog`, so its elements define the nodes that make
-up the body of the function.
+`Func` is a subclass of `Prog`, so its "array" elements define the nodes
+that make up the body of the function.
 
 Like `Prog`, `Func` return the evaluation of last node. You can use a
 `ReturnOp` to end function evaluation and return an specific node.
