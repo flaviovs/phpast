@@ -49,4 +49,8 @@ class Prog extends Node implements \ArrayAccess, \IteratorAggregate {
 	public function getIterator() {
 		return new \ArrayIterator($this->nodes);
     }
+
+	public function count() {
+		return count($this->nodes);
+	}
 }

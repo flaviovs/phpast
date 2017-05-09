@@ -53,4 +53,12 @@ class ProgTest extends NodeTest {
 			[$n0, $n1, $n2, $n3, $n4repl, $n5],
 			$prog->getIterator()->getArrayCopy());
 	}
+
+	public function testCount() {
+		$prog = new Prog([]);
+		$this->assertEquals(0, $prog->count());
+		$prog[] = $this->createMock(Node::class);
+		$prog[] = $this->createMock(Node::class);
+		$this->assertEquals(2, $prog->count());
+	}
 }
