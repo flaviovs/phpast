@@ -22,4 +22,18 @@ class AssignOpTest extends NodeTest {
 
 		$this->assertEquals('zee', $storage['foo']->getValue());
 	}
+
+	public function testGetRef() {
+		$ref = $this->createMock(Ref::class);
+		$ass = new AssignOp($ref, $this->getMockLiteral());
+
+		$this->assertSame($ref, $ass->getRef());
+	}
+
+	public function testGetValueNode() {
+		$val = $this->getMockLiteral();
+		$ass = new AssignOp($this->createMock(Ref::class), $val);
+
+		$this->assertSame($val, $ass->getValueNode());
+	}
 }

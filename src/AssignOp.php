@@ -21,4 +21,12 @@ class AssignOp extends Node {
 	public function __toString() {
 		return $this->ref . ' := ' . $this->value;
 	}
+
+	public function getRef() {
+		return $this->ref;
+	}
+
+	public function getValueNode() {
+		return $this->value;
+	}
 }
