@@ -13,6 +13,7 @@ class Out extends BuiltinOp {
 		foreach ($this->args as $arg) {
 			echo $arg->evaluate($st)->getValue();
 		}
+		return Null_::get();
 	}
 
 	public function __toString() {
