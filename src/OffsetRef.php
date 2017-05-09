@@ -12,11 +12,11 @@ class OffsetRef extends Ref {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		return $this->vlist[$this->name->evaluate($st)];
+		return $this->vlist[(string)$this->name->evaluate($st)];
 	}
 
 	public function assign(SymbolTable $st, Node $value) {
-		return ($this->vlist[$this->name->evaluate($st)] = $value);
+		return ($this->vlist[(string)$this->name->evaluate($st)] = $value);
 	}
 
 	public function __toString() {

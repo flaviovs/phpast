@@ -13,14 +13,22 @@ class AssignOpTest extends NodeTest {
 		                    $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		// Test condition checked in testEvaluate() below
+		$this->assertTrue(TRUE);
+	}
+
 	public function testEvaluate() {
 		$storage = [];
 		$st = $this->getMockSymbolTable($storage);
-		$ass = new AssignOp(new Ref($this->getMockIdentifier('foo')),
-		                    new String('zee'));
-		$ass->evaluate($st);
+		$val = new String('zee');
+		$ass = new AssignOp(new Ref($this->getMockIdentifier('foo')), $val);
+		$res = $ass->evaluate($st);
 
 		$this->assertEquals('zee', $storage['foo']->getValue());
+
+		// Ensure that assignment evaluates to value assigned
+		$this->assertSame($val, $res);
 	}
 
 	public function testGetRef() {

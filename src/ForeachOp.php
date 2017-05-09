@@ -16,7 +16,7 @@ class ForeachOp extends LoopOp {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		$res = Null_::get();
+		$res = NULL;
 		foreach ($this->vlist as $k => $v) {
 			$this->offset->assign($st, new Identifier($k));
 			$this->value->assign($st, $v);
@@ -24,7 +24,7 @@ class ForeachOp extends LoopOp {
 				break;
 			}
 		}
-		return $res;
+		return $res ?: Null_::get();
 	}
 
 	public function __toString() {

@@ -13,6 +13,15 @@ class OffsetRefTest extends NodeTest {
 		                     $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		$vlist = new VList(['foo' => $this->getMockLiteral(1)]);
+		$oref = new OffsetRef($vlist,
+		                      $this->getMockIdentifier('foo'));
+
+		$this->assertInstanceOf(Node::class,
+		                        $oref->evaluate($this->getMockSymbolTable()));
+	}
+
 	public function testEvaluate() {
 		$n0 = $this->createMock(Node::class);
 		$n1 = $this->createMock(Node::class);

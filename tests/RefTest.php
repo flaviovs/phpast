@@ -10,6 +10,13 @@ class RefTest extends NodeTest {
 		return new Ref($this->getMockIdentifier('foo'), $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		/* Nothing to evaluate, since testEvaluate() (see below) will make
+		 * sure that Ref() always return the symbol table entry, which must be
+		 * a Node already. */
+		$this->assertTrue(TRUE);
+	}
+
 	public function testEvaluate() {
 		$id = $this->getMockIdentifier('foo');
 		$ref = new Ref($id);

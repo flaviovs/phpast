@@ -17,11 +17,12 @@ class OutTest extends NodeTest {
 		$this->assertEquals("foobar", $output);
 	}
 
-	public function testEvaluateReturnsNull() {
+	public function testEvaluateReturnsNode() {
 		$out = $this->createNode();
 		ob_start();
 		$res = $out->evaluate($this->getMockSymbolTable());
 		ob_end_clean();
+		// Out must return Null
 		$this->assertSame(Null_::get(), $res);
 	}
 }

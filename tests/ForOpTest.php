@@ -9,10 +9,10 @@ class ForOpTest extends NodeTest {
 	 * Standard NodeTest node creation
 	 */
 	public function createNode($label = NULL) {
-		return new ForOp($this->createMock(Node::class),
-		                $this->createMock(Node::class),
-		                $this->createMock(Node::class),
-		                $this->createMock(Node::class),
+		return new ForOp($this->getMockLiteral(),
+		                $this->getMockLiteral(),
+		                $this->getMockLiteral(),
+		                $this->getMockLiteral(),
 		                $label);
 	}
 

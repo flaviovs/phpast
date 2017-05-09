@@ -15,7 +15,7 @@ class Prog extends Node implements \ArrayAccess, \IteratorAggregate {
 		foreach ($this->nodes as $node) {
 			$ret = $node->evaluate($st);
 		}
-		return $ret;
+		return $ret ?: Null_::get();
 	}
 
 	public function __toString() {

@@ -13,7 +13,11 @@ class LoopOpTest extends NodeTest {
 	 * Standard NodeTest node creation
 	 */
 	public function createNode($label = NULL) {
-		return new LoopOp($this->createMock(Node::class),
+		$mock = $this->createMock(Node::class);
+		$mock
+			->method('evaluate')
+			->will($this->throwException(new BreakException()));
+		return new LoopOp($mock,
 		                  $label);
 	}
 

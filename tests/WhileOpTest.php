@@ -12,8 +12,8 @@ class WhileOpTest extends NodeTest {
 	 * Standard NodeTest node creation
 	 */
 	public function createNode($label = NULL) {
-		return new WhileOp($this->createMock(Node::class),
-		                   $this->createMock(Node::class),
+		return new WhileOp($this->getMockLiteral(0),
+		                   $this->getMockLiteral(1),
 		                   $label);
 	}
 
@@ -38,6 +38,7 @@ class WhileOpTest extends NodeTest {
 			->will($this->returnCallback(function ($st) use (&$i, &$calls) {
 						$calls[] = $i;
 						$i++;
+						return $this->getMockLiteral(1);
 					}));
 
 		$op = new WhileOp($cond, $node);

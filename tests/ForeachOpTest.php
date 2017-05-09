@@ -21,6 +21,11 @@ class ForeachOpTest extends NodeTest {
 		                     $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		// Already covered in testEvaluate() below
+		$this->assertTrue(TRUE);
+	}
+
 	public function testEvaluate() {
 		$table = [];
 		$st = $this->getMockSymbolTable($table);
@@ -45,10 +50,12 @@ class ForeachOpTest extends NodeTest {
 				       }));
 
 		$op = new ForeachOp($vlist, $k, $v, $node);
-		$op->evaluate($st);
+		$res = $op->evaluate($st);
 
 		$this->assertEquals(['n1', 'n2'], $keys);
 		$this->assertEquals([$n1, $n2], $values);
+
+		$this->assertInstanceOf(Node::class, $res);
 	}
 
 }

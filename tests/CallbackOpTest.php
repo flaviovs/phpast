@@ -5,13 +5,18 @@ use PHPAST\CallbackOp;
 class CallbackOpTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new CallbackOp(function() {}, $label);
+		$lit = $this->getMockLiteral();
+		return new CallbackOp(function() use ($lit) { return $lit; }, $label);
 	}
 
 	public function testEvaluate() {
 		$calls = 0;
 
-		$cb = new CallbackOp(function() use (&$calls) { $calls++; });
+		$lit = $this->getMockLiteral();
+		$cb = new CallbackOp(function() use (&$calls, $lit) {
+				$calls++;
+				return $lit;
+			});
 		$cb->evaluate($this->getMockSymbolTable());
 
 		$this->assertEquals(1, $calls);
@@ -21,8 +26,10 @@ class CallbackOpTest extends NodeTest {
 		$st = $this->getMockSymbolTable();
 		$passed_st = NULL;
 
-		$cb = new CallbackOp(function($eval_st) use (&$passed_st) {
+		$lit = $this->getMockLiteral();
+		$cb = new CallbackOp(function($eval_st) use (&$passed_st, $lit) {
 				$passed_st = $eval_st;
+				return $lit;
 			});
 		$cb->evaluate($st);
 

@@ -4,11 +4,21 @@ use PHPAST\IncOp;
 use PHPAST\Integer;
 use PHPAST\Float;
 use PHPAST\Ref;
+use PHPAST\Node;
 
 class IncOpTest extends NodeTest {
 
 	public function createNode($label = NULL) {
 		return new IncOp($this->createMock(Ref::class), 1, $label);
+	}
+
+	public function testEvaluateReturnsNode() {
+		$table = ['foo' => new Integer(0)];
+		$st = $this->getMockSymbolTable($table);
+
+		$op = new IncOp(new Ref($this->getMockIdentifier('foo')), 5);
+
+		$this->assertInstanceOf(Node::class, $op->evaluate($st));
 	}
 
 	public function testEvaluate() {

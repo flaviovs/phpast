@@ -6,12 +6,19 @@ use PHPAST\Func;
 use PHPAST\ArgList;
 use PHPAST\Integer;
 use PHPAST\ReturnException;
+use PHPAST\Node;
 
 class CallOpTest extends NodeTest {
 	public function createNode($label = NULL) {
 		return new CallOp($this->createMock(Ref::class),
 		                  $this->getMockSymbolTable(),
 		                  $label);
+	}
+
+	public function testEvaluateReturnsNode() {
+		/* testEvaluate() (see below) will make check that the node is
+		   returned. */
+		$this->assertTrue(TRUE);
 	}
 
 	public function testEvaluate() {
@@ -41,8 +48,10 @@ class CallOpTest extends NodeTest {
 
 		$call = new CallOp(new Ref($this->getMockIdentifier('foo')),
 		                   $this->getMockSymbolTable($args));
+		$res = $call->evaluate($st);
 
-		$this->assertEquals(12345, (string)$call->evaluate($st));
+		$this->assertInstanceOf(Node::class, $res);
+		$this->assertEquals(12345, $res->getValue());
 	}
 
 	public function testEvaluateReturn() {

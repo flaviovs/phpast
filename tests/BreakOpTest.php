@@ -10,6 +10,11 @@ class BreakOpTest extends NodeTest {
 		return new BreakOp(NULL, $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		$this->expectException(BreakException::class);
+		parent::testEvaluateReturnsNode();
+	}
+
 	public function testEvaluate() {
 		$ret = $this->createMock(Integer::class);
 		$ret

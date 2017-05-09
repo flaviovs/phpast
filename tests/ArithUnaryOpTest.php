@@ -7,7 +7,9 @@ use PHPAST\ArithUnaryOp;
 use PHPAST\SymbolTable;
 
 class ArithUnaryOpTestHelper extends ArithUnaryOp {
-	public function evaluate(SymbolTable $st) {}
+	public function evaluate(SymbolTable $st) {
+		return new Integer(1);
+	}
 }
 
 class ArithUnaryOpTest extends NodeTest {

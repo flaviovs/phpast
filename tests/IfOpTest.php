@@ -11,9 +11,9 @@ class IfOpTest extends NodeTest {
 	 * Standard NodeTest node creation
 	 */
 	public function createNode($label = NULL) {
-		return new IfOp($this->createMock(Node::class),
-		                $this->createMock(Node::class),
-		                $this->createMock(Node::class),
+		return new IfOp($this->getMockLiteral(TRUE),
+		                $this->getMockLiteral(1),
+		                $this->getMockLiteral(2),
 		                $label);
 	}
 

@@ -19,6 +19,7 @@ class DefOp extends Node {
 			                    "Symbol already exist: $symbol");
 		}
 		$st[$symbol] = $this->func;
+		return Null_::get();
 	}
 
 	public function __toString() {

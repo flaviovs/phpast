@@ -12,7 +12,14 @@ class CallbackOp extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		return call_user_func($this->callback, $st);
+		$res = call_user_func($this->callback, $st);
+		if (!($res instanceof Node)) {
+			throw new TypeException($this->label,
+			                        get_class($this)
+			                        . " should return a Node, not "
+			                        . gettype($res));
+		}
+		return $res;
 	}
 
 	public function __toString() {

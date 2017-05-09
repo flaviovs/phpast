@@ -3,9 +3,12 @@
 use PHPAST\Node;
 use PHPAST\BinaryOp;
 use PHPAST\SymbolTable;
+use PHPAST\Null_;
 
 class BinaryOpTestHelper extends BinaryOp {
-	public function evaluate(SymbolTable $st) {}
+	public function evaluate(SymbolTable $st) {
+		return Null_::get();
+	}
 }
 
 class BinaryOpTest extends NodeTest {

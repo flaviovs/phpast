@@ -10,6 +10,11 @@ class ContinueOpTest extends NodeTest {
 		return new ContinueOp(NULL, $label);
 	}
 
+	public function testEvaluateReturnsNode() {
+		$this->expectException(ContinueException::class);
+		parent::testEvaluateReturnsNode();
+	}
+
 	public function testEvaluate() {
 		$ret = $this->createMock(Integer::class);
 		$ret

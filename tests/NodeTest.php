@@ -1,4 +1,4 @@
-<?php
+><?php
 
 use PHPAST\Node;
 use PHPAST\Integer;
@@ -10,7 +10,9 @@ use PHPAST\Identifier;
 use PHPAST\SymbolTable;
 
 class NodeTestHelper extends Node {
-	public function evaluate(SymbolTable $st) {}
+	public function evaluate(SymbolTable $st) {
+		return Null_::get();
+	}
 }
 
 class NodeTest extends PHPUnit\Framework\TestCase {
@@ -133,5 +135,11 @@ class NodeTest extends PHPUnit\Framework\TestCase {
 		$label = uniqid("test label ");
 		$node = $this->createNode($label);
 		$this->assertEquals($label, $node->getLabel());
+	}
+
+	public function testEvaluateReturnsNode() {
+		$node = $this->createNode();
+		$res = $node->evaluate($this->getMockSymbolTable());
+		$this->assertInstanceOf(Node::class, $res);
 	}
 }

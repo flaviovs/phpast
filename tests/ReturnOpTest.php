@@ -7,7 +7,12 @@ use PHPAST\ReturnException;
 class ReturnOpTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new ReturnOp($this->createMock(Literal::class), $label);
+		return new ReturnOp($this->getMockLiteral(), $label);
+	}
+
+	public function testEvaluateReturnsNode() {
+		$this->expectException(ReturnException::class);
+		parent::testEvaluateReturnsNode();
 	}
 
 	public function testEvaluate() {

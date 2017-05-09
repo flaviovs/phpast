@@ -5,7 +5,7 @@ use PHPAST\BuiltinOp;
 class BuiltOpTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new BuiltinOp('foo', [], NULL, $label);
+		return new BuiltinOp('sin', [1], NULL, $label);
 	}
 
 	public function testEvaluate() {

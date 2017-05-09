@@ -7,7 +7,9 @@ use PHPAST\ArithBinaryOp;
 use PHPAST\SymbolTable;
 
 class ArithBinaryOpTestHelper extends ArithBinaryOp {
-	public function evaluate(SymbolTable $st) {}
+	public function evaluate(SymbolTable $st) {
+		return new Integer(1);
+	}
 }
 
 class ArithBinaryOpTest extends NodeTest {
