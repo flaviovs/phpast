@@ -30,8 +30,8 @@ class ForeachOpTest extends NodeTest {
 		$table = [];
 		$st = $this->getMockSymbolTable($table);
 
-		$n1 = $this->createMock(Node::class);
-		$n2 = $this->createMock(Node::class);
+		$n1 = $this->getMockLiteral(1);
+		$n2 = $this->getMockLiteral(2);
 
 		$vlist = new VList(['n1' => $n1, 'n2' => $n2]);
 

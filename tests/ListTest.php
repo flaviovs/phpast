@@ -11,6 +11,14 @@ class VListTest extends LiteralTest {
 		return new VList([], $label);
 	}
 
+	public function testDeepEvaluate() {
+		$node = $this->createMock(Node::class);
+		$l1 = new VList([$node]);
+		$l2 = $l1->evaluate($this->getMockSymbolTable());
+		$this->assertSame([$node],
+		                  $l2->getIterator()->getArrayCopy());
+	}
+
 	public function testOffsetGet() {
 		$n0 = $this->createMock(Node::class);
 		$n1 = $this->createMock(Node::class);

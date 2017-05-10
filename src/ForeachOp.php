@@ -17,7 +17,7 @@ class ForeachOp extends LoopOp {
 
 	public function evaluate(SymbolTable $st) {
 		$res = NULL;
-		foreach ($this->vlist as $k => $v) {
+		foreach ($this->vlist->evaluate($st) as $k => $v) {
 			$this->offset->assign($st, new Identifier($k));
 			$this->value->assign($st, $v);
 			if (!$this->loop($st, $res)) {
