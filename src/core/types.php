@@ -23,15 +23,15 @@ class ValueWrapper extends Node {
 	public function __toString() {
 		return (string)$this->value;
 	}
-}
 
-class Identifier extends ValueWrapper {}
-
-class Literal extends ValueWrapper {
 	public function getValue() {
 		return $this->value;
 	}
 }
+
+class Identifier extends ValueWrapper {}
+
+class Literal extends ValueWrapper {}
 
 class Number extends Literal {}
 class Integer extends Number {}
