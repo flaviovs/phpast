@@ -19,7 +19,7 @@ class Prog extends Node implements \ArrayAccess, \IteratorAggregate {
 	}
 
 	public function __toString() {
-		return implode("\n", $this->nodes);
+		return $this->nodes ? implode("\n", $this->nodes) : 'Nop';
 	}
 
 	public function offsetSet($offset, $node) {
