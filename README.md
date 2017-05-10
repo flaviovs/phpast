@@ -17,6 +17,11 @@ used as the intermediate representation of a programming language. To
 properly implement a language you will need a parser to convert lexical
 constructions into the ASTs.
 
+*IMPORTANT*: PHPAST should be considered *work in progress*. The API is not
+frozen yet, and fundamental pieces may be made to work differently at any
+time. Please, create a new issue if you need to discuss something you
+want/like/don't like about this package.
+
 
 Installation
 ------------
