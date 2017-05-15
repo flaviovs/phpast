@@ -1,11 +1,11 @@
 <?php
 
-use PHPAST\ValueWrapper;
+use PHPAST\Value;
 
-class ValueWrapperTest extends NodeTest {
+class ValueTest extends NodeTest {
 
 	public function createNode($label = NULL) {
-		return new ValueWrapper('test node', $label);
+		return new Value('test node', $label);
 	}
 
 	public function testEvaluate() {
@@ -15,7 +15,7 @@ class ValueWrapperTest extends NodeTest {
 	}
 
 	public function testToString() {
-		$node = new ValueWrapper('foo');
+		$node = new Value('foo');
 		$this->assertEquals('foo', (string)$node);
 	}
 }
