@@ -10,6 +10,10 @@ class Ref extends Node {
 		$this->name = $name;
 	}
 
+	public function getIdentifier() {
+		return $this->name;
+	}
+
 	public function evaluate(SymbolTable $st) {
 		return $st[(string)$this->name->evaluate($st)];
 	}

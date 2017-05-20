@@ -47,4 +47,10 @@ class RefTest extends NodeTest {
 
 		$this->assertSame($node, $res);
 	}
+
+	public function testGetIdentifier() {
+		$id = $this->getMockIdentifier('foo');
+		$ref = new Ref($id);
+		$this->assertSame($id, $ref->getIdentifier());
+	}
 }
