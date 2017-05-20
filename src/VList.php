@@ -48,4 +48,12 @@ class VList extends Literal implements \ArrayAccess, \IteratorAggregate {
 	public function length() {
 		return count($this->value);
 	}
+
+	public function evaluate(SymbolTable $st) {
+		$items = [];
+		foreach ($this as $key => $val) {
+			$items[$key] = $val->evaluate($st);
+		}
+		return new static($items, $this->getLabel());
+	}
 }
