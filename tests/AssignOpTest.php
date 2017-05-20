@@ -4,6 +4,7 @@ use PHPAST\AssignOp;
 use PHPAST\Ref;
 use PHPAST\Node;
 use PHPAST\String;
+use PHPAST\TypeException;
 
 class AssignOpTest extends NodeTest {
 
@@ -43,5 +44,13 @@ class AssignOpTest extends NodeTest {
 		$ass = new AssignOp($this->createMock(Ref::class), $val);
 
 		$this->assertSame($val, $ass->getValueNode());
+	}
+
+	public function testCheckType() {
+		$val = $this->getMockLiteral();
+		$ass = new AssignOp($this->createMock(Node::class),
+		                    $this->createMock(Node::class));
+		$this->expectException(TypeException::class);
+		$ass->evaluate($this->getMockSymbolTable());
 	}
 }
