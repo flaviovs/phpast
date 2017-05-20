@@ -7,7 +7,7 @@ class ForeachOp extends LoopOp {
 	protected $offset;
 	protected $value;
 
-	public function __construct(VList $vlist, Ref $offset, Ref $value,
+	public function __construct(Node $vlist, Ref $offset, Ref $value,
 	                            Node $node, $label = NULL) {
 		parent::__construct($node, $label);
 		$this->vlist = $vlist;
@@ -16,8 +16,10 @@ class ForeachOp extends LoopOp {
 	}
 
 	public function evaluate(SymbolTable $st) {
+		$vlist = $this->vlist->evaluate($st);
+		$this->checkType($vlist, VList::class);
 		$res = NULL;
-		foreach ($this->vlist->evaluate($st) as $k => $v) {
+		foreach ($vlist as $k => $v) {
 			$this->offset->assign($st, new Identifier($k));
 			$this->value->assign($st, $v);
 			if (!$this->loop($st, $res)) {

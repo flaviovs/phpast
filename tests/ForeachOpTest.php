@@ -7,6 +7,7 @@ use PHPAST\Ref;
 use PHPAST\Prog;
 use PHPAST\ContinueOp;
 use PHPAST\BreakOp;
+use PHPAST\TypeException;
 
 class ForeachOpTest extends NodeTest {
 
@@ -57,5 +58,19 @@ class ForeachOpTest extends NodeTest {
 
 		$this->assertInstanceOf(Node::class, $res);
 	}
+
+	public function testTypeCheck() {
+		$bad = $this->createMock(Node::class);
+		$bad
+			->method('evaluate')
+			->willReturn($bad);
+		$ref = new ForeachOp($bad,
+		                     $this->createMock(Ref::class),
+		                     $this->createMock(Ref::class),
+		                     $this->createMock(Node::class));
+		$this->expectException(TypeException::class);
+		$ref->evaluate($this->getMockSymbolTable());
+	}
+
 
 }
