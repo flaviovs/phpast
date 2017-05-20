@@ -3,6 +3,7 @@
 use PHPAST\Identifier;
 use PHPAST\Ref;
 use PHPAST\Node;
+use PHPAST\TypeException;
 
 class RefTest extends NodeTest {
 
@@ -52,5 +53,17 @@ class RefTest extends NodeTest {
 		$id = $this->getMockIdentifier('foo');
 		$ref = new Ref($id);
 		$this->assertSame($id, $ref->getIdentifier());
+	}
+
+	public function testTypeCheck() {
+		$bad = $this->createMock(Identifier::class);
+		// Our bad node will return a node (not an identifier), so the Ref
+		// object should compain.
+		$bad
+			->method('evaluate')
+			->willReturn($this->createMock(Node::class));
+		$ref = new Ref($bad);
+		$this->expectException(TypeException::class);
+		$ref->evaluate($this->getMockSymbolTable());
 	}
 }

@@ -15,7 +15,9 @@ class Ref extends Node {
 	}
 
 	public function evaluate(SymbolTable $st) {
-		return $st[(string)$this->name->evaluate($st)];
+		$id = $this->name->evaluate($st);
+		$this->checkType($id, Identifier::class);
+		return $st[$id->getValue()];
 	}
 
 	public function assign(SymbolTable $st, Node $value) {
