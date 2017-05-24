@@ -73,5 +73,5 @@ print "--------------------\n";
 $st = new FlatSymbolTable();
 print "Output:\n";
 print "--------------------\n";
-print $prog->evaluate($st);
+$prog->evaluate($st);
 print "--------------------\n";
