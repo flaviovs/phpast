@@ -1,4 +1,4 @@
-><?php
+<?php
 
 use PHPAST\Node;
 use PHPAST\Integer;
