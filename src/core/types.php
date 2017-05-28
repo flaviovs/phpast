@@ -27,6 +27,10 @@ class Value extends Node {
 	public function getValue() {
 		return $this->value;
 	}
+
+	public function equalsTo(Value $other) {
+		return $this->getValue() === $other->getValue();
+	}
 }
 
 class Identifier extends Value {}

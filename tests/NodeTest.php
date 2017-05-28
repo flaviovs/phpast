@@ -79,6 +79,12 @@ class NodeTest extends PHPUnit\Framework\TestCase {
 			->method('__toString')
 			->willReturn($str);
 
+		$lit
+			->method('equalsTo')
+			->will($this->returnCallback(function($val) use ($ret) {
+						return $val->getValue() == $ret;
+					}));
+
 		return $lit;
 	}
 
