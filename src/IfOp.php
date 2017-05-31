@@ -5,33 +5,33 @@ namespace PHPAST;
 class IfOp extends Node {
 
 	protected $cond;
-	protected $nodet;
-	protected $nodef;
+	protected $then_;
+	protected $else_;
 
-	public function __construct(Node $cond, Node $nodet, Node $nodef = NULL,
+	public function __construct(Node $cond, Node $then_, Node $else_ = NULL,
 	                            $label = NULL) {
 		parent::__construct($label);
 		$this->cond = $cond;
-		$this->nodet = $nodet;
-		$this->nodef = $nodef;
+		$this->then_ = $then_;
+		$this->else_ = $else_;
 	}
 
 	public function evaluate(SymbolTable $st) {
 		if ($this->cond->evaluate($st)->getValue()) {
-			return $this->nodet->evaluate($st);
+			return $this->then_->evaluate($st);
 		}
-		if ($this->nodef) {
-			return $this->nodef->evaluate($st);
+		if ($this->else_) {
+			return $this->else_->evaluate($st);
 		}
 		return Null_::get();
 	}
 
 	public function __toString() {
 		$out = "If " . $this->cond . " Then\n\t" .
-			str_replace("\n", "\n\t", $this->nodet);
-		if ($this->nodef) {
+			str_replace("\n", "\n\t", $this->then_);
+		if ($this->else_) {
 			$out .= "\nElse\n\t"
-				. str_replace("\n", "\n\t", $this->nodef);
+				. str_replace("\n", "\n\t", $this->else_);
 		}
 		return $out;
 	}
