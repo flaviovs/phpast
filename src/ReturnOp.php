@@ -5,9 +5,9 @@ namespace PHPAST;
 class ReturnOp extends Node {
 	protected $val;
 
-	public function __construct(Node $val, $label = NULL) {
+	public function __construct(Node $val = NULL, $label = NULL) {
 		parent::__construct($label);
-		$this->val = $val;
+		$this->val = $val ?: Null_::get();
 	}
 
 	public function evaluate(SymbolTable $st) {
